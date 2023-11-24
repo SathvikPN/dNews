@@ -16,8 +16,7 @@ LDFLAGS = -X main.Version=${VERSION}
 ## help: helps with listing available commands
 .PHONY: help
 help:
-	@echo "build: builds the project"
-	@echo "clean: cleans up built code and vendor directory"
+	@grep '^##' $(MAKEFILE_LIST) | column -t -s ":" | sed -e 's/## //'
 
 ## lint: runs linters 
 .PHONY: lint 
