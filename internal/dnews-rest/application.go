@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/CloudyKit/jet/v6"
 )
 
 type application struct {
 	appName string
 	server  *server
 	debug   bool
-	errLog  *log.Logger
 	infoLog *log.Logger
+	errLog  *log.Logger
+	view    *jet.Set
 }
 
 type server struct {
@@ -36,6 +39,12 @@ func StartApplication(version string) {
 	}
 
 	fmt.Printf("Starting DNews application...	version '%s'\n", version)
+
+	if app.debug {
+		app.view = jet.NewSet(jet.NewOSFileSystemLoader("./web/views"), jet.InDevelopmentMode())
+	} else {
+		app.view = jet.NewSet(jet.NewOSFileSystemLoader("./web/views"))
+	}
 
 	err := app.runServer()
 
