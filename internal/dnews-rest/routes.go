@@ -2,6 +2,7 @@ package dnewsrest
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/middleware"
@@ -18,10 +19,9 @@ func (a *application) routes() http.Handler {
 	router.Use(middleware.Recoverer)
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		responseBody := fmt.Sprintln("Application Name:", a.appName)
-		_, err := w.Write([]byte(responseBody))
+		err := a.render(w, r, "index", nil)
 		if err != nil {
-			a.errLog.Println("failed to write response body, URI:", r.URL)
+			log.Fatalln(err)
 		}
 	})
 
