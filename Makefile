@@ -19,9 +19,11 @@ help:
 	@echo "build: builds the project"
 	@echo "clean: cleans up built code and vendor directory"
 
+## lint: runs linters 
 .PHONY: lint 
 lint:
 	@golangci-lint run 
+
 ## build: builds the project
 .PHONY: build 
 build: 
