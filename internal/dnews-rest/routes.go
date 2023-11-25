@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/CloudyKit/jet/v6"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 )
@@ -19,7 +20,7 @@ func (a *application) routes() http.Handler {
 	router.Use(a.LoadSession)
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		a.session.Put(r.Context(), "testSessionKey", "testSessionValue")
+		a.session.Put(r.Context(), "rootPageSessionKey", "rootPageSessionValue")
 		err := a.render(w, r, "index", nil)
 		if err != nil {
 			log.Fatalln(err)
@@ -27,7 +28,9 @@ func (a *application) routes() http.Handler {
 	})
 
 	router.Get("/welcome", func(w http.ResponseWriter, r *http.Request) {
-		err := a.render(w, r, "welcome", nil)
+		vars := make(jet.VarMap)
+		vars.Set("welcomePageSessionKey", a.session.GetString(r.Context(), "rootPageSessionKey"))
+		err := a.render(w, r, "welcome", vars)
 		if err != nil {
 			log.Fatalln(err)
 		}

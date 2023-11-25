@@ -6,6 +6,14 @@
 </head>
 
 <body>
-    <h1>DNews welcomes you to {{.URL}}</h1>
+    <h1>DNews welcomes you!</h1>
+    <p>
+        [URL] {{.URL}} <br>
+        [NOTE] If visited root page before coming here, you will see value for welcomePageSessionKey
+    </p>
+
+    {{if isset(welcomePageSessionKey)}}
+    <strong> [welcomePageSessionKey] "{{welcomePageSessionKey}}" </strong>
+    {{end}}
 </body>
 </html>
