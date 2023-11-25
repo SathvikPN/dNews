@@ -1,7 +1,6 @@
 package dnewsrest
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -19,6 +18,7 @@ func (a *application) routes() http.Handler {
 	router.Use(middleware.Recoverer)
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		a.session.Put(r.Context(), "testSessionKey", "testSessionValue")
 		err := a.render(w, r, "index", nil)
 		if err != nil {
 			log.Fatalln(err)
@@ -26,10 +26,9 @@ func (a *application) routes() http.Handler {
 	})
 
 	router.Get("/welcome", func(w http.ResponseWriter, r *http.Request) {
-		responseBody := fmt.Sprintln(a.appName, "welcomes you!")
-		_, err := w.Write([]byte(responseBody))
+		err := a.render(w, r, "welcome", nil)
 		if err != nil {
-			a.errLog.Println("failed to write response body, URI:", r.URL)
+			log.Fatalln(err)
 		}
 	})
 	return router
