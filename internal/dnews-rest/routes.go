@@ -16,6 +16,7 @@ func (a *application) routes() http.Handler {
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
+	router.Use(a.LoadSession)
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		a.session.Put(r.Context(), "testSessionKey", "testSessionValue")
