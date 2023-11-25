@@ -1,0 +1,62 @@
+go run  ./cmd/dnews-rest/main.go
+Starting DNews application...	version ''
+INFO	2023/11/25 11:24:45 server.go:17: Application REST server listening on 'localhost:9200'
+2023/11/25 11:24:50 [LAPTOP-Q3RRDV0S/Pz2LD5Yxlx-000001] "GET http://localhost:9200/ HTTP/1.1" from 127.0.0.1:57698 - 000 0B in 284.93µs
+2023/11/25 11:24:50 http: panic serving 127.0.0.1:57698: runtime error: slice bounds out of range [-1:]
+goroutine 8 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1868 +0xb9
+panic({0x7f4220?, 0xc00002e378?})
+	/usr/local/go/src/runtime/panic.go:920 +0x270
+github.com/go-chi/chi/middleware.prettyStack.decorateFuncCallLine({}, {0xc0001c8271, 0x1d}, 0xda?, 0x8)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:130 +0x525
+github.com/go-chi/chi/middleware.prettyStack.decorateLine({}, {0xc0001c8271?, 0xdb9?}, 0xe0?, 0x1?)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:106 +0x151
+github.com/go-chi/chi/middleware.prettyStack.parse({}, {0xc0001c5000, 0xdb9, 0xc0000c7478?}, {0x797be0, 0x8b6e00})
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:89 +0x3d0
+github.com/go-chi/chi/middleware.PrintPrettyStack({0x797be0, 0x8b6e00})
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:46 +0x3b
+github.com/go-chi/chi/middleware.(*defaultLogEntry).Panic(0x7c2a40?, {0x797be0?, 0x8b6e00?}, {0xc000073570?, 0xc0000735f8?, 0x419d48?})
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/logger.go:165 +0x25
+github.com/go-chi/chi/middleware.Recoverer.func1.1()
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:28 +0xc8
+panic({0x797be0?, 0x8b6e00?})
+	/usr/local/go/src/runtime/panic.go:914 +0x21f
+github.com/alexedwards/scs/v2.(*SessionManager).getSessionDataFromContext(...)
+	/home/sathvikpn/go/pkg/mod/github.com/alexedwards/scs/v2@v2.7.0/data.go:612
+github.com/alexedwards/scs/v2.(*SessionManager).Put(0x7c2a40?, {0x8bb490, 0xc00009dfb0}, {0x8151fe, 0x4}, {0x797be0?, 0x8b6a00})
+	/home/sathvikpn/go/pkg/mod/github.com/alexedwards/scs/v2@v2.7.0/data.go:155 +0x13e
+github.com/SathvikPN/dNews/internal/dnews-rest.(*application).routes.func1({0x7f379c5ba978, 0xc00003d1c0}, 0xc0001c0300)
+	/home/sathvikpn/projects/dNews/internal/dnews-rest/routes.go:21 +0x76
+net/http.HandlerFunc.ServeHTTP(0x7b3640?, {0x7f379c5ba978?, 0xc00003d1c0?}, 0xc0000144f4?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/v5.(*Mux).routeHTTP(0xc000088300, {0x7f379c5ba978, 0xc00003d1c0}, 0xc0001c0300)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.10/mux.go:444 +0x2ba
+net/http.HandlerFunc.ServeHTTP(0x7c18a0?, {0x7f379c5ba978?, 0xc00003d1c0?}, 0x7f379c5ba978?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/middleware.Recoverer.func1({0x7f379c5ba978?, 0xc00003d1c0?}, 0xc00009df00?)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/recoverer.go:37 +0x78
+net/http.HandlerFunc.ServeHTTP(0xc0001c0200?, {0x7f379c5ba978?, 0xc00003d1c0?}, 0x34?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/middleware.init.0.RequestLogger.func1.1({0x8babf0, 0xc0000f40e0}, 0xc0001c0200)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/logger.go:57 +0x16d
+net/http.HandlerFunc.ServeHTTP(0xc0001c0200?, {0x8babf0?, 0xc0000f40e0?}, 0xc000064c00?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/middleware.RealIP.func1({0x8babf0, 0xc0000f40e0}, 0xc0001c0200)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/realip.go:34 +0x95
+net/http.HandlerFunc.ServeHTTP(0x8bb490?, {0x8babf0?, 0xc0000f40e0?}, 0x8b6668?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/middleware.RequestID.func1({0x8babf0, 0xc0000f40e0}, 0xc0001c0100)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi@v1.5.5/middleware/request_id.go:76 +0x21c
+net/http.HandlerFunc.ServeHTTP(0x8bb4c8?, {0x8babf0?, 0xc0000f40e0?}, 0xb1c4f0?)
+	/usr/local/go/src/net/http/server.go:2136 +0x29
+github.com/go-chi/chi/v5.(*Mux).ServeHTTP(0xc000088300, {0x8babf0, 0xc0000f40e0}, 0xc0001c0000)
+	/home/sathvikpn/go/pkg/mod/github.com/go-chi/chi/v5@v5.0.10/mux.go:90 +0x315
+net/http.serverHandler.ServeHTTP({0xc00009de30?}, {0x8babf0?, 0xc0000f40e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2938 +0x8e
+net/http.(*conn).serve(0xc0000d21b0, {0x8bb490, 0xc00009dd40})
+	/usr/local/go/src/net/http/server.go:2009 +0x5f4
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3086 +0x5cb
+signal: interrupt
+make: *** [Makefile:39: run] Error 1
